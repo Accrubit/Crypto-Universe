@@ -72,5 +72,4 @@ contract PlanetFormation {
         uint randTerra = _generateRandomTerra(_name);
         _createPlanet(_name, randTerra);
     }
-
 }
