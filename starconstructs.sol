@@ -36,39 +36,3 @@ contract StarFormation {
     }
 
 }
-
-contract PlanetFormation {
-
-    event NewPlanet(uint planetId, string name, uint terra);
-
-    uint terraDigits = 24;
-    uint terraModulus = 10 ** terraDigits;
-
-    struct Planet {
-        string name;
-        uint terra;
-    }
-
-    Planet[] public planets;
-
-    mapping (uint => address) public planetToOwner;
-    mapping (address => uint) ownerPlanetCount;
-
-    function _createPlanet(string _name, uint _terra) private {
-        uint id = planets.push(Planet(_name, _terra)) - 1;
-        planetToOwner[id] = msg.sender;
-        ownerPlanetCount[msg.sender]++;
-        NewPlanet(id, _name, _terra);
-    }
-
-    function _generateRandomTerra(string _str) private view returns (uint) {
-        uint rand = uint(keccak256(_str));
-        return rand % terraModulus;
-    }
-
-    function createRandomPlanet(string _name) public {
-        require(ownerPlanetCount[msg.sender] <= 8);
-        uint randTerra = _generateRandomTerra(_name);
-        _createPlanet(_name, randTerra);
-    }
-}
