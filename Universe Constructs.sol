@@ -5,7 +5,7 @@ contract StarFormation {
     event NewStar(uint starId, string name, uint fusion);
 
     uint fusionDigits = 21;
-    uint fusionModulus = 10 ** dnaDigits;
+    uint fusionModulus = 10 ** fusionDigits;
 
     struct Star {
         string name;
@@ -55,7 +55,7 @@ contract PlanetFormation {
     mapping (address => uint) ownerPlanetCount;
 
     function _createPlanet(string _name, uint _terra) private {
-        uint id = planets.push(Star(_name, _terra)) - 1;
+        uint id = planets.push(Planet(_name, _terra)) - 1;
         planetToOwner[id] = msg.sender;
         ownerPlanetCount[msg.sender]++;
         NewPlanet(id, _name, _terra);
@@ -68,7 +68,6 @@ contract PlanetFormation {
 
     function createRandomPlanet(string _name) public {
         require(ownerPlanetCount[msg.sender] <= 8);
-        require(ownerStarCount[msg.sender] >= 1);
         uint randTerra = _generateRandomTerra(_name);
         _createPlanet(_name, randTerra);
     }
