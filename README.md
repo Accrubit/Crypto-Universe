@@ -3,4 +3,7 @@
 What Is This?
 -------------
 
-A blockchain game developed on Solidity which interacts with Crypto Kitties and Crypto Zombies to dominate the universe.
+A blockchain game developed using Web3 and Solidity.
+
+Power up your solar system, grab your favorite Crypto Kitties and Crypto Zombies, and collect powerful ships for a glactic battle of fur vs decay.
+
